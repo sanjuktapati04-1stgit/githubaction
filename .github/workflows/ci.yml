@@ -22,6 +22,7 @@ jobs:
           grep -q '<dialog' test.html
           grep -q 'id="theme-toggle"' test.html
           grep -q 'id="contact-form"' test.html
+          grep -q 'id="inspire-button"' test.html
 
       - name: Prepare build output
         run: |

@@ -18,6 +18,7 @@
       --border: #e8eaf0;
       --accent: #3157d5;
       --accent-hover: #2446b8;
+      --love-blue: #3157d5;
       --button-background: #3157d5;
       --button-hover: #2446b8;
     }
@@ -33,6 +34,7 @@
       --border: #343d51;
       --accent: #8da7ff;
       --accent-hover: #abc0ff;
+      --love-blue: #8da7ff;
       --button-background: #536fc7;
       --button-hover: #6682dc;
     }
@@ -139,6 +141,10 @@
       line-height: 1.08;
     }
 
+    .blue-heart {
+      color: var(--love-blue);
+    }
+
     .intro {
       max-width: 620px;
       margin: 1.25rem auto 2rem;
@@ -203,6 +209,55 @@
     .feature p {
       margin: 0;
       color: var(--muted);
+    }
+
+    .inspiration {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.9fr);
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 4rem;
+      padding: clamp(1.5rem, 5vw, 3rem);
+      border: 1px solid var(--border);
+      border-radius: 1.2rem;
+      background: var(--surface);
+    }
+
+    .inspiration h2 {
+      max-width: 430px;
+      margin: 0;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      letter-spacing: -0.035em;
+      line-height: 1.15;
+    }
+
+    .inspiration-copy > p:last-child {
+      max-width: 440px;
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .idea-card {
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 0.9rem;
+      background: var(--page-background);
+    }
+
+    .idea-label {
+      margin: 0 0 0.75rem;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 750;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .idea-prompt {
+      min-height: 4.8em;
+      margin: 0 0 1.25rem;
+      font-size: 1.15rem;
+      font-weight: 600;
     }
 
     footer {
@@ -336,6 +391,11 @@
       .features {
         grid-template-columns: 1fr;
       }
+
+      .inspiration {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
     }
   </style>
 </head>
@@ -357,7 +417,7 @@
   <main id="home">
     <section class="hero" aria-labelledby="page-title">
       <p class="eyebrow">A place to get started</p>
-      <h1 id="page-title">Welcome to your new website <span aria-label="love" role="img" style="color: #e11d48;">&hearts;</span></h1>
+      <h1 id="page-title">Welcome to your new website <span aria-label="love" role="img" style="color: #e11d48;">&hearts;</span> <span class="blue-heart" aria-hidden="true">&hearts;</span></h1>
       <p class="intro">
         A welcoming place to share your ideas, highlight your work, and help visitors
         find what matters most.
@@ -388,6 +448,23 @@
           data-title="Let's connect"
           data-description="Use the contact form to try the interaction. This sample page is static, so it validates the form locally but does not send or store messages.">Learn more</button>
       </article>
+    </section>
+
+    <section class="inspiration" aria-labelledby="inspiration-title">
+      <div class="inspiration-copy">
+        <p class="eyebrow">A little inspiration</p>
+        <h2 id="inspiration-title">Need a fresh idea to get started?</h2>
+        <p>Pick a small prompt, make it your own, and see where it takes you.</p>
+      </div>
+      <div class="idea-card">
+        <p class="idea-label">Your next spark</p>
+        <p class="idea-prompt" id="idea-prompt" role="status" aria-live="polite">
+          Sketch the simplest version of an idea you have been putting off.
+        </p>
+        <button class="button" id="inspire-button" type="button" aria-controls="idea-prompt">
+          Surprise me
+        </button>
+      </div>
     </section>
   </main>
 
@@ -439,6 +516,23 @@
     const contactDialog = document.getElementById("contact-dialog");
 
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    const inspirationPrompts = [
+      "Sketch the simplest version of an idea you have been putting off.",
+      "Ask someone what small problem you could make easier for them.",
+      "Turn a recent lesson into a short story someone else can use.",
+      "Spend ten minutes improving the first thing a visitor sees.",
+      "List three things you want your project to be known for.",
+      "Break one postponed task into a five-minute first step."
+    ];
+    let previousPromptIndex = 0;
+
+    document.getElementById("inspire-button").addEventListener("click", () => {
+      const randomIndex = Math.floor(Math.random() * (inspirationPrompts.length - 1));
+      const nextPromptIndex = randomIndex >= previousPromptIndex ? randomIndex + 1 : randomIndex;
+      previousPromptIndex = nextPromptIndex;
+      document.getElementById("idea-prompt").textContent = inspirationPrompts[nextPromptIndex];
+    });
 
     document.querySelectorAll(".feature-details").forEach((button) => {
       button.addEventListener("click", () => {
