@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A clean, responsive starter page for your website.">
+  <title>Welcome to My Website</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #172033;
+      background: #f7f8fc;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid #e8eaf0;
+    }
+
+    .nav {
+      width: min(1100px, calc(100% - 2rem));
+      min-height: 72px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      color: #3157d5;
+      font-size: 1.2rem;
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .nav-links a {
+      color: #505a70;
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: #3157d5;
+    }
+
+    main {
+      width: min(1100px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: clamp(4rem, 10vw, 7.5rem) 0;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 0.75rem;
+      color: #3157d5;
+      font-size: 0.8rem;
+      font-weight: 750;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      letter-spacing: -0.05em;
+      line-height: 1.08;
+    }
+
+    .intro {
+      max-width: 620px;
+      margin: 1.25rem auto 2rem;
+      color: #626d83;
+      font-size: 1.1rem;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 0.8rem 1.25rem;
+      border-radius: 0.6rem;
+      background: #3157d5;
+      color: #fff;
+      font-weight: 650;
+      text-decoration: none;
+      transition: background 150ms ease, transform 150ms ease;
+    }
+
+    .button:hover {
+      background: #2446b8;
+      transform: translateY(-2px);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+      padding-bottom: 4rem;
+    }
+
+    .feature {
+      padding: 1.5rem;
+      border: 1px solid #e8eaf0;
+      border-radius: 0.9rem;
+      background: #fff;
+    }
+
+    .feature h2 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .feature p {
+      margin: 0;
+      color: #626d83;
+    }
+
+    footer {
+      padding: 1.5rem 1rem;
+      border-top: 1px solid #e8eaf0;
+      color: #626d83;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        min-height: 64px;
+      }
+
+      .nav-links {
+        gap: 0.8rem;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#home">My Website</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">A place to get started</p>
+      <h1 id="page-title">Welcome to your new website <span aria-label="love" role="img" style="color: #e11d48;">&hearts;</span></h1>
+      <p class="intro">
+        Share what you do, what you care about, and what visitors can discover here.
+        Make this space your own.
+      </p>
+      <a class="button" href="#about">Explore the page</a>
+    </section>
+
+    <section class="features" id="features" aria-label="Highlights">
+      <article class="feature" id="about">
+        <h2>About</h2>
+        <p>Introduce yourself, your team, or the idea behind your website.</p>
+      </article>
+      <article class="feature">
+        <h2>What you do</h2>
+        <p>Describe a project, service, or topic you would like people to know about.</p>
+      </article>
+      <article class="feature">
+        <h2>Get in touch</h2>
+        <p>Add your preferred contact details or a link to your social profile.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; <span id="year"></span> My Website</p>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
