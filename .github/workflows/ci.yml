@@ -19,6 +19,9 @@ jobs:
           test -f test.html
           grep -q "<h1" test.html
           grep -q "<title>" test.html
+          grep -q '<dialog' test.html
+          grep -q 'id="theme-toggle"' test.html
+          grep -q 'id="contact-form"' test.html
 
       - name: Prepare build output
         run: |

@@ -11,6 +11,30 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: #172033;
       background: #f7f8fc;
+      --page-background: #f7f8fc;
+      --surface: #fff;
+      --text: #172033;
+      --muted: #626d83;
+      --border: #e8eaf0;
+      --accent: #3157d5;
+      --accent-hover: #2446b8;
+      --button-background: #3157d5;
+      --button-hover: #2446b8;
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      color: #eef1fa;
+      background: #111521;
+      --page-background: #111521;
+      --surface: #1b2232;
+      --text: #eef1fa;
+      --muted: #b1bad0;
+      --border: #343d51;
+      --accent: #8da7ff;
+      --accent-hover: #abc0ff;
+      --button-background: #536fc7;
+      --button-hover: #6682dc;
     }
 
     * {
@@ -20,6 +44,8 @@
     body {
       margin: 0;
       line-height: 1.6;
+      color: var(--text);
+      background: var(--page-background);
     }
 
     a {
@@ -27,8 +53,8 @@
     }
 
     .site-header {
-      background: #fff;
-      border-bottom: 1px solid #e8eaf0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
     }
 
     .nav {
@@ -42,7 +68,7 @@
     }
 
     .brand {
-      color: #3157d5;
+      color: var(--accent);
       font-size: 1.2rem;
       font-weight: 750;
       text-decoration: none;
@@ -54,14 +80,36 @@
     }
 
     .nav-links a {
-      color: #505a70;
+      color: var(--muted);
       font-size: 0.95rem;
       text-decoration: none;
     }
 
     .nav-links a:hover,
     .nav-links a:focus-visible {
-      color: #3157d5;
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .theme-toggle,
+    .feature-details,
+    .dialog-close {
+      border: 0;
+      color: var(--accent);
+      background: transparent;
+      font: inherit;
+      font-weight: 650;
+      cursor: pointer;
+    }
+
+    .theme-toggle:hover,
+    .feature-details:hover {
+      color: var(--accent-hover);
     }
 
     main {
@@ -76,7 +124,7 @@
 
     .eyebrow {
       margin: 0 0 0.75rem;
-      color: #3157d5;
+      color: var(--accent);
       font-size: 0.8rem;
       font-weight: 750;
       letter-spacing: 0.12em;
@@ -102,16 +150,30 @@
       display: inline-block;
       padding: 0.8rem 1.25rem;
       border-radius: 0.6rem;
-      background: #3157d5;
+      border: 0;
+      background: var(--button-background);
       color: #fff;
+      font: inherit;
       font-weight: 650;
       text-decoration: none;
       transition: background 150ms ease, transform 150ms ease;
+      cursor: pointer;
     }
 
     .button:hover {
-      background: #2446b8;
+      background: var(--button-hover);
       transform: translateY(-2px);
+    }
+
+    .button-secondary {
+      margin-left: 0.5rem;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: var(--surface);
+    }
+
+    .button-secondary:hover {
+      background: var(--page-background);
     }
 
     .features {
@@ -123,9 +185,14 @@
 
     .feature {
       padding: 1.5rem;
-      border: 1px solid #e8eaf0;
+      border: 1px solid var(--border);
       border-radius: 0.9rem;
-      background: #fff;
+      background: var(--surface);
+    }
+
+    .feature-details {
+      margin-top: 1rem;
+      padding: 0;
     }
 
     .feature h2 {
@@ -135,24 +202,135 @@
 
     .feature p {
       margin: 0;
-      color: #626d83;
+      color: var(--muted);
     }
 
     footer {
       padding: 1.5rem 1rem;
-      border-top: 1px solid #e8eaf0;
-      color: #626d83;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
       font-size: 0.9rem;
       text-align: center;
+    }
+
+    .dialog {
+      width: min(520px, calc(100% - 2rem));
+      max-height: min(80vh, 700px);
+      padding: 0;
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      color: var(--text);
+      background: var(--surface);
+      box-shadow: 0 24px 70px rgb(0 0 0 / 25%);
+    }
+
+    .dialog::backdrop {
+      background: rgb(13 18 31 / 60%);
+      backdrop-filter: blur(3px);
+    }
+
+    .dialog-content {
+      padding: clamp(1.25rem, 5vw, 2rem);
+    }
+
+    .dialog-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .dialog-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      line-height: 1.25;
+    }
+
+    .dialog-close {
+      flex: 0 0 auto;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      color: var(--muted);
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+
+    .dialog-close:hover {
+      background: var(--page-background);
+      color: var(--text);
+    }
+
+    .dialog-description,
+    .form-note {
+      color: var(--muted);
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+
+    .contact-form label {
+      display: grid;
+      gap: 0.35rem;
+      font-weight: 600;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.7rem 0.8rem;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      color: var(--text);
+      background: var(--page-background);
+      font: inherit;
+    }
+
+    .contact-form textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .form-note,
+    .form-status {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    .form-status {
+      min-height: 1.5em;
+      color: var(--accent);
+      font-weight: 650;
     }
 
     @media (max-width: 640px) {
       .nav {
         min-height: 64px;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        padding: 0.75rem 0;
       }
 
       .nav-links {
-        gap: 0.8rem;
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+
+      .nav-actions {
+        gap: 0.5rem;
       }
 
       .features {
@@ -169,6 +347,10 @@
         <a href="#about">About</a>
         <a href="#features">Features</a>
       </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="false">Dark mode</button>
+        <button class="theme-toggle" id="contact-open" type="button">Contact</button>
+      </div>
     </nav>
   </header>
 
@@ -177,33 +359,124 @@
       <p class="eyebrow">A place to get started</p>
       <h1 id="page-title">Welcome to your new website <span aria-label="love" role="img" style="color: #e11d48;">&hearts;</span></h1>
       <p class="intro">
-        Share what you do, what you care about, and what visitors can discover here.
-        Make this space your own.
+        A welcoming place to share your ideas, highlight your work, and help visitors
+        find what matters most.
       </p>
-      <a class="button" href="#about">Explore the page</a>
+      <a class="button" href="#features">Explore features</a>
+      <button class="button button-secondary" type="button" data-open-contact>Get in touch</button>
     </section>
 
     <section class="features" id="features" aria-label="Highlights">
       <article class="feature" id="about">
         <h2>About</h2>
-        <p>Introduce yourself, your team, or the idea behind your website.</p>
+        <p>Share the story, people, and purpose behind your work.</p>
+        <button class="feature-details" type="button"
+          data-title="A little about us"
+          data-description="Use this space to introduce yourself, your team, or the idea behind your website. A clear story helps visitors understand what makes your work meaningful.">Learn more</button>
       </article>
       <article class="feature">
-        <h2>What you do</h2>
-        <p>Describe a project, service, or topic you would like people to know about.</p>
+        <h2>What we do</h2>
+        <p>Showcase projects, services, or ideas you care about.</p>
+        <button class="feature-details" type="button"
+          data-title="Made for your ideas"
+          data-description="Highlight a project, service, or topic you would like people to know about. Add the details that help visitors decide what to explore next.">Learn more</button>
       </article>
       <article class="feature">
         <h2>Get in touch</h2>
-        <p>Add your preferred contact details or a link to your social profile.</p>
+        <p>Make it easy for visitors to start a conversation.</p>
+        <button class="feature-details" type="button"
+          data-title="Let's connect"
+          data-description="Use the contact form to try the interaction. This sample page is static, so it validates the form locally but does not send or store messages.">Learn more</button>
       </article>
     </section>
   </main>
+
+  <dialog class="dialog" id="feature-dialog" aria-labelledby="feature-dialog-title">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <div>
+          <p class="eyebrow">Discover</p>
+          <h2 id="feature-dialog-title"></h2>
+        </div>
+        <button class="dialog-close" type="button" data-close-dialog aria-label="Close dialog">&times;</button>
+      </div>
+      <p class="dialog-description" id="feature-dialog-description"></p>
+      <button class="button" type="button" data-close-dialog>Done</button>
+    </div>
+  </dialog>
+
+  <dialog class="dialog" id="contact-dialog" aria-labelledby="contact-dialog-title">
+    <div class="dialog-content">
+      <div class="dialog-header">
+        <div>
+          <p class="eyebrow">Say hello</p>
+          <h2 id="contact-dialog-title">Get in touch</h2>
+        </div>
+        <button class="dialog-close" type="button" data-close-dialog aria-label="Close dialog">&times;</button>
+      </div>
+      <p class="form-note">This demo form does not send or store messages.</p>
+      <form class="contact-form" id="contact-form">
+        <label for="contact-name">Your name</label>
+        <input id="contact-name" name="name" autocomplete="name" required>
+
+        <label for="contact-email">Email address</label>
+        <input id="contact-email" name="email" type="email" autocomplete="email" required>
+
+        <label for="contact-message">Message</label>
+        <textarea id="contact-message" name="message" required></textarea>
+
+        <button class="button" type="submit">Validate message</button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </dialog>
 
   <footer>
     <p>&copy; <span id="year"></span> My Website</p>
   </footer>
   <script>
+    const featureDialog = document.getElementById("feature-dialog");
+    const contactDialog = document.getElementById("contact-dialog");
+
     document.getElementById("year").textContent = new Date().getFullYear();
+
+    document.querySelectorAll(".feature-details").forEach((button) => {
+      button.addEventListener("click", () => {
+        document.getElementById("feature-dialog-title").textContent = button.dataset.title;
+        document.getElementById("feature-dialog-description").textContent = button.dataset.description;
+        featureDialog.showModal();
+      });
+    });
+
+    document.querySelectorAll("#contact-open, [data-open-contact]").forEach((button) => {
+      button.addEventListener("click", () => contactDialog.showModal());
+    });
+
+    document.querySelectorAll("[data-close-dialog]").forEach((button) => {
+      button.addEventListener("click", () => button.closest("dialog").close());
+    });
+
+    [featureDialog, contactDialog].forEach((dialog) => {
+      dialog.addEventListener("click", (event) => {
+        if (event.target === dialog) {
+          dialog.close();
+        }
+      });
+    });
+
+    document.getElementById("contact-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      document.getElementById("form-status").textContent =
+        "Form validated. No message was sent or stored.";
+      event.currentTarget.reset();
+    });
+
+    document.getElementById("theme-toggle").addEventListener("click", (event) => {
+      const isDark = document.documentElement.dataset.theme !== "dark";
+      document.documentElement.dataset.theme = isDark ? "dark" : "light";
+      event.currentTarget.setAttribute("aria-pressed", String(isDark));
+      event.currentTarget.textContent = isDark ? "Light mode" : "Dark mode";
+    });
   </script>
 </body>
 </html>
