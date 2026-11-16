@@ -1,20 +1,33 @@
 name: ci
+
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Validate
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Validate HTML file
         run: |
           test -f test.html
-          grep -q "<h1>" test.html
-      - name: Build
-        run: mkdir -p build && cp test.html build/
-      - uses: actions/upload-artifact@v4
+          grep -q "<h1" test.html
+          grep -q "<title>" test.html
+
+      - name: Prepare build output
+        run: |
+          mkdir -p build
+          cp test.html build/index.html
+
+      - name: Upload site artifact
+        uses: actions/upload-artifact@v4
         with:
           name: site
           path: build/
+          if-no-files-found: error
